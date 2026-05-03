@@ -25,6 +25,6 @@ body {
   color: var(--color-foreground);
   background-color: var(--color-neutral-300);
 }
-section.wrapper,section.about,._donate_1vuhw_1,.footer {
-  display:none;
+section.wrapper,section.about,._donate_1vuhw_1,.source > div > .wrapper,.footer {
+  display:none !important;
 }
