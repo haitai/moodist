@@ -16,6 +16,8 @@ interface SoundsProps {
   sounds: Sounds;
 }
 
+const DEFAULT_VISIBLE_SOUNDS = 9;
+
 export function Sounds({ functional, id, sounds }: SoundsProps) {
   const [showAll, setShowAll] = useLocalStorage(`${id}-show-more`, false);
   const [clickedMore, setClickedMore] = useState(false);
@@ -74,20 +76,20 @@ export function Sounds({ functional, id, sounds }: SoundsProps) {
             key={sound.label}
             {...sound}
             functional={functional}
-            hidden={!showAll && index > 5}
-            ref={index === 6 ? firstNewSound : undefined}
+            hidden={!showAll && index >= DEFAULT_VISIBLE_SOUNDS}
+            ref={index === DEFAULT_VISIBLE_SOUNDS ? firstNewSound : undefined}
             selectHidden={selectHidden}
             unselectHidden={unselectHidden}
           />
         ))}
 
-        {sounds.length < 2 &&
-          new Array(2 - sounds.length)
+        {sounds.length < 3 &&
+          new Array(3 - sounds.length)
             .fill(null)
             .map((_, index) => <div key={index} />)}
       </div>
 
-      {sounds.length > 6 && (
+      {sounds.length > DEFAULT_VISIBLE_SOUNDS && (
         <button
           ref={showMoreButton}
           className={cn(

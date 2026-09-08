@@ -10,6 +10,7 @@ import {
   DonateItem,
   SourceItem,
   SettingsItem,
+  ThemeItem,
   PresetsItem,
   ShortcutsItem,
   SleepTimerItem,
@@ -149,6 +150,7 @@ export function Menu() {
 
                     <Divider />
                     <SettingsItem open={() => open('settings')} />
+                    <ThemeItem />
                     <Divider />
                     <ShortcutsItem open={() => open('shortcuts')} />
                     <Divider />

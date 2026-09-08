@@ -9,19 +9,19 @@
     color: var(--color-foreground);
     pointer-events: auto;
     cursor: pointer;
-    background-color: var(--color-neutral-100);
-    border: 1px solid var(--color-neutral-300);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
     border-radius: 50%;
     transition: 0.2s;
 
     &:focus-visible {
-      outline: 2px solid var(--color-neutral-400);
+      outline: 2px solid var(--color-focus);
       outline-offset: 2px;
     }
 
     &:hover,
     &:focus-visible {
-      background-color: var(--color-neutral-200);
+      background-color: var(--color-surface-hover);
     }
   }
 }
@@ -36,7 +36,8 @@
   max-height: var(--radix-dropdown-menu-content-available-height);
   padding: 4px;
   overflow: auto;
-  background-color: var(--color-neutral-100);
-  border: 1px solid var(--color-neutral-300);
-  border-radius: 8px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 0;
+  box-shadow: var(--shadow-floating);
 }

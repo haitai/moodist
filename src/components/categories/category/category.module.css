@@ -1,4 +1,6 @@
 .category {
+  scroll-margin-top: 24px;
+
   &:not(:last-of-type) {
     margin-bottom: 20px;
   }
@@ -12,7 +14,7 @@
     & .tail {
       width: 1px;
       height: 75px;
-      background: linear-gradient(transparent, var(--color-neutral-300));
+      background: linear-gradient(transparent, var(--color-border-strong));
     }
 
     & .icon {
@@ -22,11 +24,8 @@
       width: 45px;
       height: 45px;
       font-size: var(--font-md);
-      background: linear-gradient(
-        var(--color-neutral-50),
-        var(--color-neutral-100)
-      );
-      border: 1px solid var(--color-neutral-300);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
       border-radius: 50%;
     }
   }

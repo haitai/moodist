@@ -30,6 +30,7 @@ export function Item({
         className={styles.item}
         disabled={disabled}
         {...(href ? { href, target: '_blank' } : {})}
+        {...(!href && active !== undefined ? { 'aria-pressed': active } : {})}
         aria-label={label}
       >
         <span className={styles.label}>

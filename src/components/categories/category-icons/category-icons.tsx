@@ -1,41 +1,40 @@
 import { sounds } from '@/data/sounds';
 import { useMemo } from 'react';
+
 import styles from './category-icons.module.css';
+
 import { Container } from '@/components/container';
-import { Tooltip } from '@/components/tooltip';
 
 export default function CategoryIcons() {
   const categories = useMemo(() => sounds.categories, []);
 
   const goto = (id: string) => {
     const category = document.getElementById(`category-${id}`);
-    category?.scrollIntoView();
+    category?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <Container>
       <div className={styles.wrapper}>
-        <h3 className={styles.title}>Categories</h3>
-        <div className={styles.categoryIconsWrapper}>
-          <Tooltip.Provider delayDuration={0}>
-            {categories.map(category => {
-              return (
-                <Tooltip
-                  content={category.title}
-                  key={category.id}
-                  placement="bottom"
-                >
-                  <button
-                    className={styles.icon}
-                    onClick={() => goto(category.id)}
-                  >
-                    {category.icon}
-                  </button>
-                </Tooltip>
-              );
-            })}
-          </Tooltip.Provider>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Browse sounds</h2>
+          <p>Jump to any category.</p>
         </div>
+
+        <nav aria-label="Sound categories" className={styles.categories}>
+          {categories.map(category => (
+            <button
+              className={styles.category}
+              key={category.id}
+              onClick={() => goto(category.id)}
+            >
+              <span aria-hidden="true" className={styles.icon}>
+                {category.icon}
+              </span>
+              <span>{category.title}</span>
+            </button>
+          ))}
+        </nav>
       </div>
     </Container>
   );

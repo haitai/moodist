@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/remvze/moodist/compare/v2.6.1...v3.0.0) (2026-09-06)
+
+
+### 🐛 Bug Fixes
+
+* **docker:** set OCI image labels ([0ba8092](https://github.com/remvze/moodist/commit/0ba8092c164c9da8f8636012baeb55586931db37))
+* update outdated YouTube lofi embeds ([60a978b](https://github.com/remvze/moodist/commit/60a978bd7f3d1a086224ebbbb4dff8b889d42b08)), closes [#98](https://github.com/remvze/moodist/issues/98)
+
+
+### ✨ Features
+
+* redesign ([8032710](https://github.com/remvze/moodist/commit/80327105b6573059873236d35dea36aeb7e8218b))
+
 ### [2.6.1](https://github.com/remvze/moodist/compare/v2.6.0...v2.6.1) (2026-07-12)
 
 

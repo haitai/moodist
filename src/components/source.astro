@@ -1,141 +1,128 @@
 ---
 import { FaGithub } from 'react-icons/fa/index';
 
-import { SpecialButton } from './special-button';
-import { Container } from './container';
 import { Binary } from './binary';
+import { Container } from './container';
+import { SpecialButton } from './special-button';
+
 import { generateRandomBinaryString } from '@/helpers/binary';
 
-const initialBinary = generateRandomBinaryString(1000);
+const initialBinary = generateRandomBinaryString(400);
 ---
 
-<div class="source">
+<section class="source">
   <Container>
     <div class="wrapper">
-      <div class="iconContainer">
-        <div class="tail"></div>
-        <div class="icon">
-          <FaGithub />
-        </div>
-      </div>
-
-      <h2 class="title"><span>Open Source</span></h2>
-      <p class="desc">Moodist is free and open-source!</p>
-
-      <div class="button">
-        <SpecialButton href="https://github.com/remvze/moodist">
-          Source Code
-        </SpecialButton>
-      </div>
-
-      <div class="binary">
+      <div aria-hidden="true" class="binary">
         <Binary initialValue={initialBinary} client:visible />
+      </div>
+
+      <div class="copy">
+        <h2>Built in the open.</h2>
+        <p>
+          Moodist is free and open-source. Explore the code, suggest an idea, or
+          help make ambient listening better for everyone.
+        </p>
+      </div>
+
+      <div class="action">
+        <SpecialButton href="https://github.com/remvze/moodist">
+          <FaGithub />
+          View source on GitHub
+        </SpecialButton>
       </div>
     </div>
   </Container>
-</div>
+</section>
 
 <style>
   .source {
-    margin-top: 40px;
+    padding: 80px 0 120px;
 
     & .wrapper {
       position: relative;
-      padding: 0 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 48px;
+      align-items: end;
+      padding: 52px 0;
       overflow: hidden;
-      background: linear-gradient(transparent, rgb(24 24 27 / 70%));
-      border-radius: 0 0 20px 20px;
+    }
+
+    & .binary {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 48%;
+      height: 112px;
+      overflow: hidden;
+      font-family: 'Nimbus Mono PS', 'Courier New', monospace;
+      font-size: var(--font-2xsm);
+      line-height: 1.35;
+      color: var(--color-foreground-subtler);
+      word-break: break-all;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.28;
+      mask-image: radial-gradient(
+        ellipse at center,
+        #000 20%,
+        rgb(0 0 0 / 92%) 38%,
+        rgb(0 0 0 / 68%) 56%,
+        rgb(0 0 0 / 36%) 72%,
+        rgb(0 0 0 / 12%) 84%,
+        transparent 96%
+      );
+      transform: translateY(-50%);
+    }
+
+    & .copy {
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+
+      & h2 {
+        font-family: var(--font-display);
+        font-size: clamp(2.25rem, 6vw, 3.75rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.035em;
+      }
+
+      & p {
+        max-width: 510px;
+        margin-top: 20px;
+        font-size: var(--font-base);
+        line-height: 1.6;
+        color: var(--color-foreground-subtle);
+      }
+    }
+
+    & .action {
+      position: relative;
+      z-index: 1;
+    }
+
+  }
+
+  @media (width <= 600px) {
+    .source {
+      padding: 64px 0 88px;
+
+      & .wrapper {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        align-items: start;
+        padding: 40px 0;
+      }
 
       & .binary {
-        position: absolute;
-        bottom: -2.1rem;
-        left: 50%;
-        width: calc(100% + 10px);
-        height: 200px;
-        overflow: hidden;
-        font-family: 'Nimbus Mono PS', 'Courier New', monospace;
-        color: var(--color-foreground-subtler);
-        word-break: break-all;
-        pointer-events: none;
-        cursor: default;
-        user-select: none;
-        opacity: 0.35;
-        mask-image: linear-gradient(transparent, #000);
-        transform: translateX(-50%);
+        display: none;
       }
 
-      &::after {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 70%;
-        height: 1px;
-        content: '';
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--color-neutral-400),
-          transparent
-        );
-        transform: translateX(-50%);
+      & .copy h2 {
+        font-size: clamp(2.15rem, 11vw, 3rem);
       }
-    }
-
-    & .iconContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 15px;
-
-      & .tail {
-        width: 1px;
-        height: 75px;
-        background: linear-gradient(transparent, var(--color-neutral-300));
-      }
-
-      & .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        font-size: var(--font-md);
-        background: linear-gradient(
-          var(--color-neutral-50),
-          var(--color-neutral-100)
-        );
-        border: 1px solid var(--color-neutral-300);
-        border-radius: 50%;
-      }
-    }
-
-    & .title {
-      font-family: var(--font-display);
-      font-size: var(--font-lg);
-      font-weight: 600;
-      text-align: center;
-
-      & span {
-        background: linear-gradient(
-          135deg,
-          var(--color-foreground),
-          var(--color-foreground-subtle)
-        );
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    }
-
-    & .desc {
-      margin-top: 8px;
-      color: var(--color-foreground-subtle);
-      text-align: center;
-    }
-
-    .button {
-      display: flex;
-      justify-content: center;
-      margin: 16px auto 0;
     }
   }
 </style>

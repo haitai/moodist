@@ -2,8 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 20;
-  background-color: rgb(9 9 11 / 40%);
-  backdrop-filter: blur(5px);
+  background-color: var(--color-backdrop);
 }
 
 .modal {
@@ -26,8 +25,10 @@
     padding-top: 40px;
     margin: 0 auto;
     pointer-events: fill;
-    background-color: var(--color-neutral-100);
-    border-radius: 8px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    box-shadow: var(--shadow-floating);
 
     &.wide {
       width: 95%;
@@ -50,11 +51,11 @@
       cursor: pointer;
       background-color: transparent;
       border: none;
-      border-radius: 4px;
+      border-radius: 0;
       outline: none;
 
       &:focus-visible {
-        outline: 2px solid var(--color-neutral-400);
+        outline: 2px solid var(--color-focus);
         outline-offset: 2px;
       }
     }
@@ -99,9 +100,9 @@
   font-weight: 500;
   color: var(--color-foreground);
   cursor: pointer;
-  background-color: var(--color-neutral-200);
+  background-color: var(--color-surface-hover);
   border: none;
-  border-radius: 6px;
+  border-radius: 0;
   outline: none;
   transition:
     color 180ms ease,
@@ -109,7 +110,7 @@
     transform 120ms ease;
 
   &:hover {
-    background-color: var(--color-neutral-300);
+    background-color: var(--color-surface-active);
   }
 
   &:active {
@@ -117,7 +118,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-neutral-400);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 
@@ -127,11 +128,11 @@
   }
 
   &.primary {
-    color: var(--color-neutral-100);
-    background-color: var(--color-neutral-950);
+    color: var(--color-inverted-foreground);
+    background-color: var(--color-inverted-background);
 
     &:hover {
-      background-color: var(--color-neutral-800);
+      background-color: var(--color-inverted-background-hover);
     }
   }
 

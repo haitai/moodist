@@ -7,17 +7,17 @@
   font-family: var(--font-heading);
   font-size: var(--font-base);
   line-height: 0;
-  color: var(--color-neutral-200);
+  color: var(--color-inverted-foreground);
   cursor: pointer;
-  background-color: var(--color-neutral-950);
-  border: 1px solid var(--color-neutral-50);
+  background-color: var(--color-inverted-background);
+  border: 1px solid var(--color-background);
   border-radius: 100px;
   transition:
     background-color 180ms ease,
     transform 120ms ease;
 
   &:hover {
-    background-color: var(--color-neutral-800);
+    background-color: var(--color-inverted-background-hover);
   }
 
   &:not(.disabled):active {
@@ -34,7 +34,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-neutral-400);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 }

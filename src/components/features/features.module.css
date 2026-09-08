@@ -10,7 +10,7 @@
     & .tail {
       width: 1px;
       height: 75px;
-      background: linear-gradient(transparent, var(--color-neutral-300));
+      background-color: var(--color-border-strong);
     }
 
     & .icon {
@@ -20,9 +20,9 @@
       width: 45px;
       height: 45px;
       font-size: var(--font-md);
-      background-color: var(--color-neutral-100);
-      border: 1px solid var(--color-neutral-300);
-      border-radius: 50%;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
+      border-radius: 0;
     }
   }
 
@@ -51,9 +51,9 @@
       margin-bottom: 12px;
       font-size: var(--font-md);
       color: var(--color-foreground-subtle);
-      background: linear-gradient(var(--color-neutral-100), transparent);
-      border: 1px solid var(--color-neutral-200);
-      border-radius: 12px;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 0;
     }
 
     & .label {
@@ -91,8 +91,8 @@
       font-size: var(--font-2xsm);
       font-weight: 500;
       line-height: 1;
-      background: linear-gradient(var(--color-neutral-100), transparent);
-      border: 1px solid var(--color-neutral-300);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
       border-radius: 100px;
     }
   }

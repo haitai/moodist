@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSSR } from './use-ssr';
 
-const themeMatch = '(prefers-color-scheme: dark)';
-
 export function useDarkTheme() {
   const { isBrowser } = useSSR();
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
@@ -10,17 +8,20 @@ export function useDarkTheme() {
   useEffect(() => {
     if (!isBrowser) return;
 
-    const themeMediaQuery = window.matchMedia(themeMatch);
+    const themeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    function handleThemeChange(event: MediaQueryListEvent) {
-      setIsDarkTheme(event.matches);
+    function handleThemeChange() {
+      setIsDarkTheme(document.documentElement.dataset.theme === 'dark');
     }
 
     themeMediaQuery.addEventListener('change', handleThemeChange);
-    setIsDarkTheme(themeMediaQuery.matches);
+    window.addEventListener('themechange', handleThemeChange);
+    handleThemeChange();
 
-    return () =>
+    return () => {
       themeMediaQuery.removeEventListener('change', handleThemeChange);
+      window.removeEventListener('themechange', handleThemeChange);
+    };
   }, [isBrowser]);
 
   return isDarkTheme;

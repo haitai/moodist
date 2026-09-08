@@ -3,6 +3,7 @@ export { Share as ShareItem } from './share';
 export { Donate as DonateItem } from './donate';
 export { Source as SourceItem } from './source';
 export { Settings as SettingsItem } from './settings';
+export { Theme as ThemeItem } from './theme';
 export { Presets as PresetsItem } from './presets';
 export { Shortcuts as ShortcutsItem } from './shortcuts';
 export { SleepTimer as SleepTimerItem } from './sleep-timer';

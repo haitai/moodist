@@ -1,5 +1,6 @@
 ---
 import { pwaInfo } from 'virtual:pwa-info'; // eslint-disable-line
+import { Font } from 'astro:assets';
 
 import { Reload } from '@/components/reload';
 
@@ -25,7 +26,30 @@ const description =
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
     <meta content="#18181b" name="theme-color" />
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('moodist-theme');
+        const preference = ['system', 'light', 'dark'].includes(saved)
+          ? saved
+          : 'system';
+        const theme =
+          preference === 'system'
+            ? matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+            : preference;
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', theme === 'dark' ? '#18181b' : '#fafafa');
+      })();
+    </script>
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <Font cssVariable="--font-inter" preload={[{ weight: 400 }]} />
+    <Font cssVariable="--font-inter-tight" />
+    <Font cssVariable="--font-fraunces" preload />
 
     <title>{title}</title>
     <meta content={title} name="title" />

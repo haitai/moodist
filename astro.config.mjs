@@ -1,9 +1,35 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import react from '@astrojs/react';
 import AstroPWA from '@vite-pwa/astro';
 
 export default defineConfig({
+  fonts: [
+    {
+      cssVariable: '--font-inter',
+      name: 'Inter',
+      provider: fontProviders.google(),
+      styles: ['normal'],
+      subsets: ['latin'],
+      weights: [400, 500],
+    },
+    {
+      cssVariable: '--font-inter-tight',
+      name: 'Inter Tight',
+      provider: fontProviders.google(),
+      styles: ['normal'],
+      subsets: ['latin'],
+      weights: [600, 700],
+    },
+    {
+      cssVariable: '--font-fraunces',
+      name: 'Fraunces',
+      provider: fontProviders.google(),
+      styles: ['normal'],
+      subsets: ['latin'],
+      weights: [400, 500, 600],
+    },
+  ],
   integrations: [
     react(),
     AstroPWA({
