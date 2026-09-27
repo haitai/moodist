@@ -1,22 +1,27 @@
-import { useState, type FormEvent } from 'react';
+import { useRef, useState, type FormEvent } from 'react';
 
 import { cn } from '@/helpers/styles';
 import { useSoundStore } from '@/stores/sound';
 import { usePresetStore } from '@/stores/preset';
+import { useSnackbar } from '@/contexts/snackbar';
 
 import styles from './new.module.css';
 
-export function New() {
+export function New({ onSaved }: { onSaved?: () => void }) {
   const [name, setName] = useState('');
+  const isSubmitting = useRef(false);
 
   const noSelected = useSoundStore(state => state.noSelected());
   const sounds = useSoundStore(state => state.sounds);
   const addPreset = usePresetStore(state => state.addPreset);
+  const showSnackbar = useSnackbar();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || noSelected) return;
+    const label = name.trim();
+    if (!label || noSelected || isSubmitting.current) return;
+    isSubmitting.current = true;
 
     const _sounds: Record<string, number> = {};
 
@@ -26,14 +31,16 @@ export function New() {
         _sounds[id] = sounds[id].volume;
       });
 
-    addPreset(name, _sounds);
+    addPreset(label, _sounds);
+    showSnackbar('Mix saved.');
 
     setName('');
+    onSaved?.();
   };
 
   return (
     <div className={styles.new}>
-      <h3 className={styles.title}>New Preset</h3>
+      <h3 className={styles.title}>Save current mix</h3>
 
       <form
         className={cn(styles.form, noSelected && styles.disabled)}
@@ -41,19 +48,21 @@ export function New() {
       >
         <input
           disabled={noSelected}
-          placeholder="Preset's Name"
+          placeholder="Name this mix"
           required
+          maxLength={60}
           type="text"
           value={name}
-          onChange={e => setName(e.target.value)}
+          onChange={e => {
+            isSubmitting.current = false;
+            setName(e.target.value);
+          }}
         />
         <button disabled={noSelected}>Save</button>
       </form>
 
       {noSelected && (
-        <p className={styles.noSelected}>
-          To make a preset, first select some sounds.
-        </p>
+        <p className={styles.noSelected}>Select some sounds to save a mix.</p>
       )}
     </div>
   );

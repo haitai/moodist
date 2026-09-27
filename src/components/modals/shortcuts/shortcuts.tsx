@@ -10,6 +10,10 @@ interface ShortcutsModalProps {
 export function ShortcutsModal({ onClose, show }: ShortcutsModalProps) {
   const shortcuts = [
     {
+      keys: ['Ctrl/⌘', 'K'],
+      label: 'Search sounds',
+    },
+    {
       keys: ['Shift', 'H'],
       label: 'Shortcuts List',
     },
@@ -40,6 +44,10 @@ export function ShortcutsModal({ onClose, show }: ShortcutsModalProps) {
     {
       keys: ['Shift', 'G'],
       label: 'Settings',
+    },
+    {
+      keys: ['Shift', 'D'],
+      label: 'Toggle Theme',
     },
     {
       keys: ['Shift', 'T'],
