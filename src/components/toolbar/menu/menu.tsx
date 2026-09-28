@@ -16,12 +16,14 @@ import {
   SleepTimerItem,
   BreathingExerciseItem,
   PomodoroItem,
+  FlowmodoroItem,
   NotepadItem,
   TodoItem,
   CountdownItem,
   BinauralItem,
   IsochronicItem,
   LofiItem,
+  RadioItem,
 } from './items';
 import { Divider } from './divider';
 import { ShareLinkModal } from '@/components/modals/share-link';
@@ -33,7 +35,14 @@ import { BreathingExerciseModal } from '@/components/modals/breathing';
 import { BinauralModal } from '@/components/modals/binaural';
 import { IsochronicModal } from '@/components/modals/isochronic';
 import { LofiModal } from '@/components/modals/lofi';
-import { Pomodoro, Notepad, Todo, Countdown } from '@/components/toolbox';
+import { RadioModal } from '@/components/modals/radio';
+import {
+  Pomodoro,
+  Flowmodoro,
+  Notepad,
+  Todo,
+  Countdown,
+} from '@/components/toolbox';
 
 import { fade, mix, slideY } from '@/lib/motion';
 import { useSoundStore } from '@/stores/sound';
@@ -47,6 +56,7 @@ import { OPEN_PRESETS } from '@/constants/events';
 
 export function Menu() {
   const [isOpen, setIsOpen] = useState(false);
+  const [radioPlaying, setRadioPlaying] = useState(false);
 
   const noSelected = useSoundStore(state => state.noSelected());
 
@@ -57,8 +67,10 @@ export function Menu() {
       countdown: false,
       isochronic: false,
       lofi: false,
+      radio: false,
       notepad: false,
       pomodoro: false,
+      flowmodoro: false,
       presets: false,
       settings: false,
       shareLink: false,
@@ -96,6 +108,7 @@ export function Menu() {
   useHotkeys('shift+b', () => open('breathing'));
   useHotkeys('shift+n', () => open('notepad'));
   useHotkeys('shift+p', () => open('pomodoro'));
+  useHotkeys('shift+f', () => open('flowmodoro'));
   useHotkeys('shift+t', () => open('todo'));
   useHotkeys('shift+c', () => open('countdown'));
   useHotkeys('shift+g', () => open('settings'));
@@ -148,6 +161,7 @@ export function Menu() {
                     <Divider />
                     <CountdownItem open={() => open('countdown')} />
                     <PomodoroItem open={() => open('pomodoro')} />
+                    <FlowmodoroItem open={() => open('flowmodoro')} />
                     <NotepadItem open={() => open('notepad')} />
                     <TodoItem open={() => open('todo')} />
                     <BreathingExerciseItem open={() => open('breathing')} />
@@ -156,6 +170,10 @@ export function Menu() {
                     <BinauralItem open={() => open('binaural')} />
                     <IsochronicItem open={() => open('isochronic')} />
                     <LofiItem open={() => open('lofi')} />
+                    <RadioItem
+                      active={radioPlaying}
+                      open={() => open('radio')}
+                    />
 
                     <Divider />
                     <SettingsItem open={() => open('settings')} />
@@ -191,6 +209,11 @@ export function Menu() {
         show={modals.pomodoro}
         onClose={() => close('pomodoro')}
       />
+      <Flowmodoro
+        open={() => open('flowmodoro')}
+        show={modals.flowmodoro}
+        onClose={() => close('flowmodoro')}
+      />
       <Notepad show={modals.notepad} onClose={() => close('notepad')} />
       <Todo show={modals.todo} onClose={() => close('todo')} />
       <Countdown show={modals.countdown} onClose={() => close('countdown')} />
@@ -205,6 +228,11 @@ export function Menu() {
         onClose={() => close('isochronic')}
       />
       <LofiModal show={modals.lofi} onClose={() => close('lofi')} />
+      <RadioModal
+        show={modals.radio}
+        onClose={() => close('radio')}
+        onPlayingChange={setRadioPlaying}
+      />
     </>
   );
 }
